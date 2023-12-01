@@ -29,9 +29,10 @@ public class signInCommand implements MemberInterface {
 			return;
 		}
 		
-		
+		System.out.println(vo.getMid());
 
 		HttpSession session = request.getSession();
+		session.setAttribute("sNickName", vo.getNickName());
 		session.setAttribute("sMid", vo.getMid());
 		session.setAttribute("sLevel", vo.getLevel());
 		

@@ -3,7 +3,10 @@ package member;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import diary.DiaryVO;
 import util.RootDAO;
 
 
@@ -99,9 +102,9 @@ public class MemberDAO {
 					vo.setAddress(rs.getString(9));
 					vo.setEmail(rs.getString(10));
 					vo.setContent(rs.getString("content"));
-					vo.setLevel(rs.getInt(11));
-					vo.setLastDate(rs.getString(12));
-					vo.setSalt(rs.getString(13));
+					vo.setLevel(rs.getInt(12));
+					vo.setLastDate(rs.getString(13));
+					vo.setSalt(rs.getString(14));
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -134,6 +137,106 @@ public class MemberDAO {
 			}
 			return res;
 		}
+
+		public int getTotRecCnt() {
+			int totRecCnt = 0;
+			try {
+				sql = "select count(*) as cnt from member";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				rs.next();
+				totRecCnt = rs.getInt("cnt");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				rsClose();
+			}
+			return totRecCnt;
+		}
+
+		public ArrayList<MemberVO> getMemberList(int startIndexNo, int pageSize) {
+			ArrayList<MemberVO> vos = new ArrayList<MemberVO>();
+			try {
+				sql = "select * from member limit ?,?;";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startIndexNo);
+				pstmt.setInt(2, pageSize);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					MemberVO vo = new MemberVO();
+					vo.setIdx(rs.getInt(1));
+					vo.setMid(rs.getString(2));
+					vo.setPwd(rs.getString(3));
+					vo.setNickName(rs.getString(4));
+					vo.setName(rs.getString(5));
+					vo.setGender(rs.getString(6));
+					vo.setBirthday(rs.getString(7));
+					vo.setTel(rs.getString(8));
+					vo.setAddress(rs.getString(9));
+					vo.setEmail(rs.getString(10));
+					vo.setContent(rs.getString("content"));
+					vo.setLevel(rs.getInt(12));
+					vo.setLastDate(rs.getString(13));
+					vo.setSalt(rs.getString(14));
+					
+					vos.add(vo);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				rsClose();
+			}
+			return vos;
+		}
+
+		public MemberVO getMemberSearchidx(int idx) {
+			MemberVO vo = new MemberVO();
+			sql = "select * from member where idx= ?";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo.setIdx(rs.getInt(1));
+					vo.setMid(rs.getString(2));
+					vo.setPwd(rs.getString(3));
+					vo.setNickName(rs.getString(4));
+					vo.setName(rs.getString(5));
+					vo.setGender(rs.getString(6));
+					vo.setBirthday(rs.getString(7));
+					vo.setTel(rs.getString(8));
+					vo.setAddress(rs.getString(9));
+					vo.setEmail(rs.getString(10));
+					vo.setContent(rs.getString("content"));
+					vo.setLevel(rs.getInt(12));
+					vo.setLastDate(rs.getString(13));
+					vo.setSalt(rs.getString(14));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				rsClose();
+			}
+			return vo;
+		}
+
+		public int DeleteMember(int idx) {
+			try {
+				String sql  = "delete from member where idx = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, idx);
+				res = pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				pstmtClose();
+			}
+			return res;
+		}
+		
+		
 		
 		
 }

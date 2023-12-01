@@ -58,11 +58,11 @@ public class SignUpProcCommand implements MemberInterface {
 		
 		if(res ==1) {
 			request.setAttribute("msg", "가입성공 로그인하세요");
-			request.setAttribute("url", "main.ad");
+			request.setAttribute("url", "main.admin");
 		}
 		if(res ==0) {
 			request.setAttribute("msg", "가입실패");
-			request.setAttribute("url", "main.ad");
+			request.setAttribute("url", "main.admin");
 		}
 	}
 

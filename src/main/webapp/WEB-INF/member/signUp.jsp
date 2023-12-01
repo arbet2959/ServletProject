@@ -276,7 +276,7 @@
     <div><img id="demo" width="200px"/></div>
     <button type="button" class="btn btn-secondary" onclick="fCheck()">회원가입</button> &nbsp;
     <button type="reset" class="btn btn-secondary">다시작성</button> &nbsp;
-    <button type="button" class="btn btn-secondary" onclick="location.href='${ctp}/main.ad';">돌아가기</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='${ctp}/main.admin';">돌아가기</button>
     
     <input type="hidden" name="email" />
     <input type="hidden" name="tel" />

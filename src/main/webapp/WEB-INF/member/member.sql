@@ -10,7 +10,7 @@ create table member (
   address   varchar(100),								/* 주소(다음 API 활용) */
   email		  varchar(60) not null,		  	/* 이메일(아이디/비밀번호 분실시에 사용)-형식체크필수 */
   content   text,												/* 회원 소개 */
-  level     int default 1,							/* 회원등급(-1: 탈퇴회원 0:관리자, 1:준회원, 2:정회원, 3:우수회원, (4:운영자)) */
+  level     int default 1,							/* 회원등급(-1: 탈퇴신청회원 0:관리자, 1:준회원, 2:정회원, 3:우수회원, (4:운영자)) */
   lastDate  datetime default now(),			/* 마지막 접속일 */
   salt      char(32) not null, 			/* 비밀번호 보안을 위한 salt */
   primary key (idx),

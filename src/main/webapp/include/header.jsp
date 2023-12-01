@@ -37,8 +37,8 @@
 	}
 </script>
 
-<div class="jumbotron text-center" style="margin-bottom:0; height:150px">
-  <h1 style="margin:-16px">모두의 일기장</h1>
+<div class="jumbotron text-center" style="margin-bottom:0; height:350px">
+  <img src="${ctp}/images/top.jpg" width="100%">
   <br/>
 </div>
 
@@ -49,20 +49,22 @@
   </button>
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
+    	<c:if test="${sLevel>=0 }">
+	      <li class="nav-item ml-2 mr-2">
+	        <button type="button" class="btn btn-secondary" onclick="location.href='myDiaryList.diary'">나의일기</button>
+	      </li>
+	      <li class="nav-item ml-2 mr-2">
+	        <button type="button" class="btn btn-secondary" onclick="location.href='friendDiaryList.diary'">친구일기</button>
+	      </li>
+	      <li class="nav-item ml-2 mr-2">
+	        <button type="button" class="btn btn-secondary" onclick="location.href='friendList.friend'">친구관리</button>
+	      </li>
+      </c:if>
       <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-secondary" onclick="location.href='myDiaryList.diary'">나의일기</button>
-      </li>
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-secondary" onclick="location.href=''">공유일기</button>
-      </li>
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-secondary" onclick="location.href=''">친구일기</button>
-      </li>
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-secondary" onclick="location.href=''">친구관리</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='openDiaryList.diary'">공유일기</button>
       </li>
       
-      <li class="nav-item ml-2 mr-2">
+      <!-- <li class="nav-item ml-2 mr-2">
         <div class="dropdown">
 			    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">베스트 일기</button>
 			    <div class="dropdown-menu">
@@ -70,25 +72,26 @@
 			      <a class="dropdown-item" href="#">이번주의 일기</a>
 			      <a class="dropdown-item" href="#">이번달의 일기</a>
 			      <a class="dropdown-item" href="#">올해의 일기</a>
-			      <a class="dropdown-item" href="#">분류별 일기</a>
 			    </div>
 			  </div>
-      </li>
-      <li class="nav-item ml-2 mr-2">
-        <div class="dropdown">
-			    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">관리자기능</button>
-			    <div class="dropdown-menu">
-			    	<a class="dropdown-item" href="#">신고관리</a>
-			      <a class="dropdown-item" href="#">회원관리</a>
-			      <a class="dropdown-item" href="#">일기관리</a>
-			      <a class="dropdown-item" href="#">이벤트관리</a>
-			      <a class="dropdown-item" href="#">통계</a>
-			    </div>
-			  </div>
-      </li>
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-secondary" onclick="''">쪽지함</button>
-      </li>
+      </li> -->
+      <c:if test="${sLevel=='0'}">
+	      <li class="nav-item ml-2 mr-2">
+	        <div class="dropdown">
+				    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">관리자기능</button>
+				    <div class="dropdown-menu">
+				    	<a class="dropdown-item" href="adminComplaintList.admin">신고관리</a>
+				      <a class="dropdown-item" href="adminMemberList.admin">회원관리</a>
+				      <a class="dropdown-item" href="adminDiaryList.admin">일기관리</a>
+				    </div>
+				  </div>
+	      </li>
+      </c:if>
+      <c:if test="${sLevel>=0 }">
+	      <li class="nav-item ml-2 mr-2">
+	        <button type="button" class="btn btn-secondary" onclick="''">쪽지함</button>
+	      </li>
+	    </c:if>
       <li class="nav-item ml-2 mr-2">
       	<c:if test="${empty sMid}">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#SignInModal">로그인</button>
@@ -100,6 +103,10 @@
       <li class="nav-item ml-2 mr-2">
      	 <button type="button" class="btn btn-secondary" onclick="location.href='signUp.member'">회원가입</button>
       </li>
+      <li class="nav-item ml-2 mr-2">
+      ${sMid}
+      </li>
+      
     </ul>
   </div>
  

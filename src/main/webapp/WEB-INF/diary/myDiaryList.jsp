@@ -54,7 +54,11 @@
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
         <td>${curScrStartNo}</td>
-        <td class="text-left"><a href="diaryContent.diary?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
+        <td class="text-left">
+        	<c:forEach var="i" begin="2" end="${vo.re_step}">
+        	 ㄴ>
+        	</c:forEach>
+        	<a href="myDiaryContent.diary?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
         	<c:if test="${fn:substring(vo.wDate,0,10)==now}">  <img src="${ctp}/images/new.gif"> </c:if>
         </td>
         <td>${vo.nickName}</td>
@@ -91,7 +95,7 @@
 
 <!-- 검색기처리 -->
 <div class="container text-center">
-	<form name="searchForm" method="post" action="diarySearch.diary">
+	<form name="searchForm" method="post" action="myDiarySearch.diary">
 		<select name="search" id="search">
 			<option value="title" selected>글제목</option>
 			<option value="nickName">글쓴이</option>
